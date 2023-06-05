@@ -40,13 +40,14 @@ def browser(request):  # This will return the Browser value to setup method
 def pytest_configure(config):
     metadata = config.pluginmanager.getplugin("metadata")
     if metadata:
+        print("entered into if loop")
         config.stash[metadata_key]['Project Name'] = 'OmnyControl'
         config.stash[metadata_key]['Module Name'] = 'Login'
         config.stash[metadata_key]['Tester'] = 'RajKumar'
     else:
-        config.stash['Project Name'] = 'OmnyControl'
-        config.stash['Module Name'] = 'Login'
-        config.stash['Tester'] = 'RajKumar'
+        config._metadata['Project Name'] = 'OmnyControl'
+        config._metadata['Module Name'] = 'Login'
+        config._metadata['Tester'] = 'RajKumar'
 
 
 # It is hook for delete/Modify Environment info to HTML Report
@@ -63,7 +64,7 @@ def pytest_runtest_makereport(item, call):
     setattr(report, "duration_formatter", "%H:%M:%S.%f")
     extra = getattr(report, "extra", [])
     if report.when == "call":
-        extra.append(pytest_html.extras.url("https://login.bigcommerce.com/"))
+        extra.append(pytest_html.extras.url("https://omnymanage.dev.omnytraq.com/dashboard"))
         xfail = hasattr(report, "wasxfail")
         if (report.skipped and xfail) or (report.failed and not xfail):
             report_directory = os.path.dirname(item.config.option.htmlpath)
@@ -78,4 +79,4 @@ def pytest_runtest_makereport(item, call):
 
 
 def pytest_html_report_title(report):
-    report.title = "Firework Applications!"
+    report.title = "OmnyControl Application!"
