@@ -2,6 +2,7 @@ import os.path
 import time
 import pytest
 from selenium import webdriver
+from pytest_metadata.plugin import metadata_key
 
 
 @pytest.fixture()
@@ -37,13 +38,18 @@ def browser(request):  # This will return the Browser value to setup method
 
 # It is hook for Adding Environment info to HTML Report
 def pytest_configure(config):
-    config._metadata['Project Name'] = 'Big Commerce'
-    config._metadata['Module Name'] = 'Firework'
-    config._metadata['Tester'] = 'RajKumar'
+    metadata = config.pluginmanager.getplugin("metadata")
+    if metadata:
+        config.stash[metadata_key]['Project Name'] = 'OmnyControl'
+        config.stash[metadata_key]['Module Name'] = 'Login'
+        config.stash[metadata_key]['Tester'] = 'RajKumar'
+    else:
+        config.stash['Project Name'] = 'OmnyControl'
+        config.stash['Module Name'] = 'Login'
+        config.stash['Tester'] = 'RajKumar'
 
 
 # It is hook for delete/Modify Environment info to HTML Report
-@pytest.mark.optionalhook
 def pytest_metadata(metadata):
     metadata.pop("JAVA_HOME", None)
     metadata.pop("Plugins", None)

@@ -1,6 +1,4 @@
 import pytest
-from selenium import webdriver
-
 from pageObjects.LoginPage import LoginPage
 from utilities.customLogger import LogGen
 from utilities.readProperties import ReadConfig
@@ -12,11 +10,9 @@ class Test_001_Login:
 
     @pytest.mark.order(1)
     @pytest.mark.regression
-    def test_login(self):
+    def test_login(self,setup):
         self.logger.info("****************** Verifying Login to the OmnyControl ****************")
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.implicitly_wait(30)
+        self.driver = setup # webdriver.Chrome()
         self.driver.get(self.baseURL)
         self.lp = LoginPage(self.driver)
         self.lp.setUserName()

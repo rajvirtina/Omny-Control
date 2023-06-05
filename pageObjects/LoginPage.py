@@ -1,10 +1,7 @@
 import time
-
-from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
 from utilities.readProperties import ReadConfig
 
 
