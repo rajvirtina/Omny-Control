@@ -20,3 +20,10 @@ class ReadConfig:
         password = config.get('common info', 'password')
         return password
 
+    @staticmethod
+    def getPrivacyUrl():
+        privacyUrl = config.get('common info', 'privacyUrl')
+        return privacyUrl
+
+
+

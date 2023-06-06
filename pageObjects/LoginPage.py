@@ -63,7 +63,7 @@ class LoginPage:
         self.driver.find_element(By.XPATH, self.btn_edit_xpath).click()
         pass_word = string.ascii_letters + string.digits + string.punctuation
         updatedPassword = ''
-        for i in range(8):
+        for i in range(9):
             updatedPassword += ''.join(secrets.choice(pass_word))
         #updatedPassword = "Nehaagatebc"
         element = self.driver.find_element(By.NAME, self.textbox_password_name)
